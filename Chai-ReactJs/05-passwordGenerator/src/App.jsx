@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 // import "./App.css";
 import { useCallback } from "react";
 
@@ -7,18 +7,28 @@ function App() {
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
-  //
+  // useRef hook
+  const passwordRef = useRef(null);
   const passwordGenerator = useCallback(() => {
     let pass = "";
     let str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     if (numberAllowed) str += "0123456789";
     if (charAllowed) str += "!@#$%^&*(){}~`";
-    for (let i = 0; i <= array.length; i++) {
+    for (let i = 0; i <= length; i++) {
       let char = Math.floor(Math.random() * str.length + 1);
-      pass = str.charAt(char);
+      pass += str.charAt(char);
     }
     setPassword(pass);
   }, [length, numberAllowed, charAllowed, setPassword]);
+  // method of copy password.
+  const copyTOClipboard=useCallback(()=>{
+    passwordRef.current?.select()
+    passwordRef.current?.setSelectionRange(0,6)
+    window.navigator.clipboard.writeText(password)
+  },[password])
+  useEffect(() => {
+    passwordGenerator();
+  }, [length, numberAllowed, charAllowed, passwordGenerator]);
   return (
     <>
       <div className="f-w max-w-lg mx-auto shadow-md rounded-lg px-8 py-8 my-8 text-orange-500 bg-gray-500">
@@ -32,8 +42,12 @@ function App() {
             readOnly
             placeholder="Password"
             className="outline-none w-full py-1 px-3"
+            ref={passwordRef}
           />
-          <button className="outline-none bg-blue-700 text-white py-0.5 px-3 shrink-0 w-fit">
+          <button
+            onClick={copyTOClipboard}
+            className="outline-none bg-blue-700 text-white py-0.5 px-3 shrink-0 w-fit"
+          >
             Copy
           </button>
         </div>
@@ -66,7 +80,7 @@ function App() {
               id="inputCharacter"
               defaultChecked={charAllowed}
               onChange={() => {
-                setNumberAllowed((prev) => !prev);
+                setCharAllowed((prev) => !prev);
               }}
             />
             <label htmlFor="inputCharacter">Character</label>
