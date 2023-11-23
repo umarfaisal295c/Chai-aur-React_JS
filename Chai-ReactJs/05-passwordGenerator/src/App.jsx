@@ -21,11 +21,11 @@ function App() {
     setPassword(pass);
   }, [length, numberAllowed, charAllowed, setPassword]);
   // method of copy password.
-  const copyTOClipboard=useCallback(()=>{
-    passwordRef.current?.select()
-    passwordRef.current?.setSelectionRange(0,6 )
-    window.navigator.clipboard.writeText(password)
-  },[password])
+  const copyTOClipboard = useCallback(() => {
+    passwordRef.current?.select();
+    passwordRef.current?.setSelectionRange(0, 6);
+    window.navigator.clipboard.writeText(password);
+  }, [password]);
   useEffect(() => {
     passwordGenerator();
   }, [length, numberAllowed, charAllowed, passwordGenerator]);
@@ -50,7 +50,7 @@ function App() {
           >
             Copy
           </button>
-        </div> 
+        </div>
         <div className="flex text-lg gap-x-2">
           <div className="flex items-center gap-x-1">
             <input
