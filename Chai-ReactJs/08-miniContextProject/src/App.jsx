@@ -2,16 +2,16 @@
 import './App.css'
 import Login from './components/Login'
 import Profile from './components/Profile'
-import UserContextProvider from './context/UserContextProvider'
+import ContextProvider from './context/ContextProvider'
 function App() {
  
 
   return (
-    <UserContextProvider>
+    <ContextProvider>
     <h1>React with Chai and share is important</h1>
     <Login />
     <Profile />
-  </UserContextProvider>
+  </ContextProvider>
   )
 }
 
