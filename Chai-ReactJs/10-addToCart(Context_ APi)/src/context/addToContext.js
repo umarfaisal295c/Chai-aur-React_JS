@@ -2,6 +2,7 @@ import { createContext, useContext } from "react";
 //1
 export const AddToCartContext = createContext({
   add: 0,
+  bill:0,
   addToCart: () => {},
   removeToCart: () => {},
 });
