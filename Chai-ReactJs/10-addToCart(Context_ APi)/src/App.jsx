@@ -8,16 +8,19 @@ import Bill from "./components/Bill";
 function App() {
   const [add, setAdd] = useState(0);
   const [bill, setBill] = useState(0);
+  const [i11,setI11] = useState(0)
   const Added = add + 1;
   const Removed = add - 1;
 
   const addToCart = () => {
     setAdd(Added);
-    setBill(bill+1050);
+    setBill(bill+90000);
+    setI11(i11+90000)
   };
   const removeToCart = () => {
     setAdd(Removed);
-    setBill(bill-1050);
+    // setBill(bill-1050);
+    setI11(i11-90000)
   };
   // useEffect(() => {
   //   document.querySelector('html').classList.remove("Added","Removed");
