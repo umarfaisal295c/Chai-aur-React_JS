@@ -2,21 +2,34 @@ import React from "react";
 import { DeleteAllUser } from "./DeleteAllUser";
 import styled from "styled-components";
 import { fakeUserData } from "../fakeData";
-
+import { useDispatch, useSelector } from "react-redux";
+import { addUser } from "../store/slices/userSlice";
 const UserDetails = () => {
-  const addNewUser=(payload )=>{
+  const dispatch = useDispatch();
+  const addNewUser = (payload) => {
+    dispatch(addUser(payload));
     console.log(payload);
-  }
+  };
+  const data = useSelector((state) => {
+    return state.user;
+  });
+  console.log(data);
   return (
     <Wrapper>
       <div className="content">
         <div className="admin-table">
           <div className="admin-subtitle">List of User Details</div>
-          <button className="btn add-btn" onClick={()=>addNewUser(fakeUserData())}>Add New Users</button>
+          <button
+            className="btn add-btn"
+            onClick={() => addNewUser(fakeUserData())}
+          >
+            Add New Users
+          </button>
         </div>
         <ul>
-          {/* <li>Hi</li>
-          <li>Hii</li> */}
+          {data.map((user, id) => {
+            return <li key={id}>{user}</li>;
+          })}
         </ul>
         <hr />
         <DeleteAllUser />
