@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/*  */
+.navlink{
+  font-size: 20px;
+  font-weight: 500;
+  /* font-family: 'Caveat', cursive; */
+  font-family: 'Roboto Condensed', sans-serif;
+  transition: 0.5s;
+  padding: 6px;
+  border-radius: 10px;
+  color: #ffff;
+}
+.navlink:hover{
+  color: #F85606;
+  /* background: #2e1102 ;
+   */
+   background: rgb(223, 205, 205);
+}

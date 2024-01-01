@@ -14,7 +14,7 @@ const Cart = () => {
   });
   const dispatch = useDispatch();
   // create a state for total Price.
-  const [totalPrice,setTotalPrice]=useState(0)
+  const [totalPrice, setTotalPrice] = useState(0);
   // const cart = [0, 1];
   //
   const empty = () => {
@@ -33,16 +33,16 @@ const Cart = () => {
     dispatch(removeSingleItem(data));
   };
   // function of Total Price.
-  const tp=()=>{
-    let tPrice=0;
-    cart.map((data,id)=>{
-      tPrice=data.price * data.qnty+tPrice
-      setTotalPrice(tPrice)
-    })
-  }
-  useEffect(()=>{
-    tp()
-  },[tp])
+  const tp = () => {
+    let tPrice = 0;
+    cart.map((data, id) => {
+      tPrice = data.price * data.qnty + tPrice;
+      setTotalPrice(tPrice);
+    });
+  };
+  useEffect(() => {
+    tp();
+  }, [tp]);
   return (
     <>
       {/* <div className="cartWrapper">
