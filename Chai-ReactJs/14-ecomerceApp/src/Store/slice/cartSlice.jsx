@@ -44,9 +44,9 @@ const cartSlice = createSlice({
       }
     },
     // empty clear all Data.
-    // emptyCartData:(state,action)=>{
-    //   state.cart=[]
-    // }
+    emptyCartData:(state,action)=>{
+      state.cart=[]
+    }
   },
 });
 export default cartSlice.reducer;
