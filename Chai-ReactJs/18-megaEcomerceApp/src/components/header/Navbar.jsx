@@ -1,6 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 const Navbar = () => {
+  // const authStatus = useSelector((state) => state.slice.status);
+  
   return (
     <nav className="bg-gray-800">
       <div className="container flex">
@@ -136,25 +140,25 @@ const Navbar = () => {
         <div className="flex justify-between items-center flex-grow pl-12">
           <div className="flex items-center capitalize space-x-6">
             <NavLink
-              to={""}
+              to={"/"}
               className="text-gray-200 hover:text-white transition"
             >
               Home
             </NavLink>
             <NavLink
-              to={""}
+              to={"/shop"}
               className="text-gray-200 hover:text-white transition"
             >
               Shop
             </NavLink>
             <NavLink
-              to={""}
+              to={"/aboutus"}
               className="text-gray-200 hover:text-white transition"
             >
               About us
             </NavLink>
             <NavLink
-              to={""}
+              to={"/contactus"}
               className="text-gray-200 hover:text-white transition"
             >
               Contact us
@@ -162,14 +166,15 @@ const Navbar = () => {
           </div>
           {/* login and signUp */}
           <div>
+            {}
             <NavLink
-              to={""}
+              to={"/login"}
               className="text-gray-200 hover:text-primary transition mr-3 font-bold"
             >
               Login {""} ||{" "}
             </NavLink>
             <NavLink
-              to={""}
+              to={"/signup"}
               className="text-gray-200 hover:text-primary transition font-bold"
             >
               <i class="bx bxs-user"></i> SignUp

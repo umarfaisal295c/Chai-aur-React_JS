@@ -3,4 +3,6 @@ import FavCart from "./header/FavCart";
 import AddToCart from "./header/AddToCart";
 import DarkMode from "./header/DarkMode";
 import Navbar from "./header/Navbar";
-export { Logo, FavCart, AddToCart, DarkMode, Navbar };
+import Input from "./loginSignup/input.jsx";
+import Button from "./loginSignup/Button.jsx";
+export { Logo, FavCart, AddToCart, DarkMode, Navbar, Input,Button };

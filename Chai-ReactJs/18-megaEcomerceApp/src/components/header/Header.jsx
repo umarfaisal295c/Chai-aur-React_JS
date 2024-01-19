@@ -4,7 +4,7 @@ import { Logo, FavCart, AddToCart, DarkMode, Navbar } from "../index";
 const Header = () => {
   return (
     <>
-      <header className="py-4 shadow-sm bg-white">
+      <header className="py-4 shadow-sm bg-white z-1">
         <div className="container flex justify-between items-center">
           {/*  Logo */}
           <Logo />
