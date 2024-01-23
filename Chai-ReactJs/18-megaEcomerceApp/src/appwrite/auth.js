@@ -45,7 +45,7 @@ export class Authservices {
     } catch (error) {
         throw error
     }
-    return null;
+    // return null;
   }
   // create a method for logout.
   async logout() {

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { login, logout } from "./store/authSlice";
 import Header from "./components/header/Header";
 import authServices from "./appwrite/auth";
+import { Outlet } from "react-router-dom";
 import { Routes, Route, NavLink } from "react-router-dom";
 import LoginPage from "./components/loginSignup/LoginPage";
 import Signup from "./components/loginSignup/SignupPage";
@@ -22,17 +23,18 @@ function App() {
       })
       .finally(() => setLoading(false));
   }, []);
-  return (
+  return !loading ? (
     <>
       <Header />
-
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
+      {/* <main> */}
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/signup" element={<Signup/>} />
+        </Routes>
+      {/* </main> */}
     </>
-  );
+  ) : null;
 }
 
 export default App;

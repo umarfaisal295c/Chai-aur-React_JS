@@ -3,26 +3,48 @@ import authServices from "../../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { login as authLogin } from "../../store/authSlice";
+// import { login as authLogin } from "../../store/authSlice";
+import { login } from "../../store/authSlice";
 import { Button, Input } from "../../components/index";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 const Signup = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm();
+  // yup
+  const schema = yup
+    .object({
+      firstName: yup.string().required("Full Name is required"),
+      email: yup
+        .string()
+        .email("This must be a valid email")
+        .required("Email is required"),
+      password: yup
+        .string()
+        .required("Password is required")
+        .min(8, "Password must be of 8 characters"),
+    })
+    .required();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   const loginMethod = async (data) => {
     setError("");
     try {
       const session = await authServices.createAccount(data);
       if (session) {
         const userData = await authServices.getCurrentUser();
-        navigate("/");
+        console.log(userData);
 
         if (userData) {
-          dispatch(authLogin(userData));
-        }
+          dispatch(login(userData));
+          console.log("data of signup Page", userData);
 
-        // console.log(userData);
+          navigate("/");
+        }
       }
     } catch (error) {
       setError("signup error", error.message);
@@ -56,7 +78,7 @@ const Signup = () => {
                 Sign Up
               </Link>
             </p>
-            {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+            {/* {error && <p className="text-red-600 mt-8 text-center">{error}</p>} */}
             <form onSubmit={handleSubmit(loginMethod)}>
               <div className="relative mt-2 ">
                 <Input
@@ -64,10 +86,15 @@ const Signup = () => {
                   placeholder="Enter your Full-Name"
                   type="text"
                   className="mb-2 mt-4 ml-9"
-                  {...register("name", {
+                  {...register("firstName", {
                     required: true,
                   })}
                 />
+                {errors.firstName && (
+                  <span className="text-red-600 mt-2 text-center">
+                    {errors.firstName.message}
+                  </span>
+                )}
                 <Input
                   label="Email"
                   placeholder="Enter your email"
@@ -83,6 +110,11 @@ const Signup = () => {
                     },
                   })}
                 />
+                {errors.email && (
+                  <span className="text-red-600 mt-2 text-center">
+                    {errors.email.message}
+                  </span>
+                )}
                 {/* for Password */}
 
                 <Input
@@ -94,6 +126,11 @@ const Signup = () => {
                     required: true,
                   })}
                 />
+                {errors.password && (
+                  <span className="text-red-600 mt-2 text-center">
+                    {errors.password.message}
+                  </span>
+                )}
                 <Button type="submit" className="w-full mt-4">
                   Signup
                 </Button>
