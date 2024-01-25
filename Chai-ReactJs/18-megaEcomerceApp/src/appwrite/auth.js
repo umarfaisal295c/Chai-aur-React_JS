@@ -1,3 +1,4 @@
+import { current } from "@reduxjs/toolkit";
 import conf from "../config/conf";
 import { Client, Account, ID } from "appwrite";
 // create a class for auth.
@@ -21,27 +22,37 @@ export class Authservices {
         password,
         name
       );
-      if (userAccount) {
-        return this.login(email, password);
-      } else {
-        return userAccount;
-      }
+      // if (userAccount) {
+      //   return this.login({email, password});
+      // } else {
+      //   return userAccount;
+      // }
+      return userAccount
     } catch (error) {
       console.log("createAccount", error);
     }
   }
   // create a method for login.
-  async login({ email, password }) {
+  // async login({ email, password }) {
+  //   try {
+  //     const log= await this.account.createEmailSession({ email, password });
+  //     console.log(log);
+  //   } catch (error) {
+  //     console.log("Login Page", error);
+  //   }
+  // }
+  async login({email,password}){
     try {
-      return await this.account.createEmailSession({ email, password });
+      const loginData= await this.account.createEmailSession(email,password)
+      console.log(loginData);
     } catch (error) {
-      console.log("Login", error);
+      console.log("login data error",error);
     }
   }
   // create a getCurrentUser method.
   async getCurrentUser(){
     try {
-      return await this.account.get()
+      return await this.account.get("current")
     } catch (error) {
         throw error
     }
@@ -50,9 +61,9 @@ export class Authservices {
   // create a method for logout.
   async logout() {
     try {
-      return await this.account.deleteSessions();
+      return await this.account.deleteSessions("current");
     } catch (error) {
-      console.log("Logout", error);
+      console.log("Appwrite serive :: logout :: error", error);
     }
   }
 }

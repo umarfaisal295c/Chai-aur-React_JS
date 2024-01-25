@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ID } from "appwrite";
 import authServices from "../../appwrite/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,10 +9,13 @@ import { login } from "../../store/authSlice";
 import { Button, Input } from "../../components/index";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { account } from "../../appwrite/configAuth";
 const Signup = () => {
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [error, setError] = useState("");
+  const id = ID.unique();
   // yup
   const schema = yup
     .object({
@@ -31,29 +35,37 @@ const Signup = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const loginMethod = async (data) => {
-    setError("");
+  // const loginMethod = async ({name,email,password}) => {
+  //   try {
+  //     // {name,email,password}
+  //     // const userData = await authServices.createAccount(data);
+  //     // if (userData) {
+  //     //   const userData = await authServices.getCurrentUser();
+
+  //     //   if (userData) dispatch(login(userData));
+  //     //   alert("Login");
+  //     // navigate("/");
+  //     // }
+  //     const userData = await authServices.createAccount({name,email,password});
+  //     console.log(userData);
+  //     if (userData) navigate("/");
+  //     const signData=await account.create("unique()",email,password,name)
+  //     console.log("signData",signData);
+  //   } catch (error) {
+  //     console.log("Error Message :", error);
+  //   }
+  // };
+
+  const registerData = async ({name,email,password}) => {
     try {
-      const session = await authServices.createAccount(data);
-      if (session) {
-        const userData = await authServices.getCurrentUser();
-        console.log(userData);
-
-        if (userData) {
-          dispatch(login(userData));
-          console.log("data of signup Page", userData);
-
-          navigate("/");
-        }
-      }
+      const signData = await account.create( ID.unique(),name,email,password);
+      console.log("signData", signData);
+      if (signData) navigate("/");
     } catch (error) {
-      setError("signup error", error.message);
+      console.log("signData", error);
     }
   };
 
-  //   const reg=()=>{
-  //     authServices.createAccount()
-  //   }
   return (
     <>
       <section className="bg-gray-50 min-h-screen flex items-center justify-center">
@@ -79,12 +91,13 @@ const Signup = () => {
               </Link>
             </p>
             {/* {error && <p className="text-red-600 mt-8 text-center">{error}</p>} */}
-            <form onSubmit={handleSubmit(loginMethod)}>
+            <form onSubmit={handleSubmit(registerData)}>
               <div className="relative mt-2 ">
                 <Input
                   label="Name"
                   placeholder="Enter your Full-Name"
                   type="text"
+                  name="name"
                   className="mb-2 mt-4 ml-9"
                   {...register("firstName", {
                     required: true,
@@ -99,6 +112,7 @@ const Signup = () => {
                   label="Email"
                   placeholder="Enter your email"
                   type="email"
+                  name="email"
                   className="mb-2 mt-4 ml-9"
                   {...register("email", {
                     required: true,
@@ -121,6 +135,7 @@ const Signup = () => {
                   label="Password"
                   placeholder="Enter Password"
                   type="password"
+                  name="password"
                   className="mb-2 ml-2 mt-4 "
                   {...register("password", {
                     required: true,

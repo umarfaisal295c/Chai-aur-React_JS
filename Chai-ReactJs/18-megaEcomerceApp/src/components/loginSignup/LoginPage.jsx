@@ -1,28 +1,40 @@
 import React, { useState } from "react";
-import authServices from "../../appwrite/auth";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Link,useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { login as authLogin } from "../../store/authSlice";
 import { Button, Input } from "../../components/index";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { login } from "../../store/authSlice";
+import authServices from "../../appwrite/auth";
 const LoginPage = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm();
-  const loginMethod = async (data) => {
-    setError("");
+  //
+  const navigate=useNavigate()
+  const schema = yup
+    .object({
+      email: yup
+        .string()
+        .required("Email is required")
+        .email("This must be a valid email"),
+      password: yup
+        .string()
+        .required("Password is required")
+        .min(8, "Password must be of 8 characters"),
+    })
+    .required();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  // yup
+
+  const create = async ({email, password}) => {
     try {
-      const session = await authServices.login(data);
-      if (session) {
-        const userData = await authServices.getCurrentUser();
-        if (userData) {
-          dispatch(authLogin(userData));
-          navigate("/");
-        }
-      }
+      const userData = await authServices.login({email, password});
+      console.log("userData",userData);
+       if(userData) navigate("/")
     } catch (error) {
-      setError(error.message);
+      console.log(error);
     }
   };
   return (
@@ -49,11 +61,11 @@ const LoginPage = () => {
                 Sign Up
               </Link>
             </p>
-            {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+            {/* {error && <p className="text-red-600 mt-8 text-center">{error}</p>} */}
             <form
-            //               action=""
-            //               onSubmit={handleSubmit(loginMethod)}
-            //               // className="flex flex-col gap-4"
+              action=""
+              onSubmit={handleSubmit(create)}
+              //               // className="flex flex-col gap-4"
             >
               <div className="relative mt-2 ">
                 <Input
@@ -71,6 +83,11 @@ const LoginPage = () => {
                     },
                   })}
                 />
+                {errors.email && (
+                  <span className="text-red-600 mt-2 text-center">
+                    {errors.email.message}
+                  </span>
+                )}
                 {/* for Password */}
 
                 <Input
@@ -82,6 +99,11 @@ const LoginPage = () => {
                     required: true,
                   })}
                 />
+                {errors.password && (
+                  <span className="text-red-600 mt-2 text-center">
+                    {errors.password.message}
+                  </span>
+                )}
                 <Button type="submit" className="w-full mt-4">
                   Signup
                 </Button>

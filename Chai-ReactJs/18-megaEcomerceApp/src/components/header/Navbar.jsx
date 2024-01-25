@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import Logout from "./Logout";
+import authServices from "../../appwrite/auth";
 const Navbar = () => {
-  // const authStatus = useSelector((state) => state.slice.status);
-
+  const authStatus = useSelector((state) => state.auth.status);
   return (
     <nav className="bg-gray-800">
       <div className="container flex">
@@ -23,12 +23,12 @@ const Navbar = () => {
 
               <ul
                 className="absolute w-52 left-0 top-14 bg-white shadow-md py-3 divide-y divide-gray-300
-          divide-dashed   invisible group-hover:visible transition duration-300 "
+          divide-dashed   invisible group-hover:visible transition duration-300 z-10 "
               >
                 {/* <ul class="absolute hidden text-gray-700 pt-1 group-hover/main:block"> */}
                 <li className="group/item relative ">
                   <NavLink
-                    className="flex item-center px-5 py-3 hover:bg-gray-100 transition"
+                    className="flex item-center px-5 py-3 hover:bg-gray-100  transition"
                     href="#"
                   >
                     <img
@@ -36,7 +36,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm relative group">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
                       Groceries & Pets
                     </span>
                   </NavLink>
@@ -74,7 +74,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Health & Beauty
                     </span>
                   </NavLink>
@@ -112,7 +112,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Mens Fashions
                     </span>
                   </NavLink>
@@ -127,7 +127,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Womens Fashions
                     </span>
                   </NavLink>
@@ -142,7 +142,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Home & Lifestyle
                     </span>
                   </NavLink>
@@ -157,7 +157,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Electronic Devices
                     </span>
                   </NavLink>
@@ -172,7 +172,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Home appliances
                     </span>
                   </NavLink>
@@ -187,7 +187,7 @@ const Navbar = () => {
                       alt=""
                       className="w-5 h-5 object-contain"
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Sports & Outdoor
                     </span>
                   </NavLink>
@@ -200,9 +200,9 @@ const Navbar = () => {
                     <img
                       src="https://cdn-icons-png.flaticon.com/128/4305/4305522.png"
                       alt=""
-                      className="w-5 h-5 object-contain"
+                      className="w-5 h-5 object-contain "
                     />
-                    <span className="ml-5 text-gray-600 text-sm">
+                    <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Watche & Jewellery
                     </span>
                   </NavLink>
@@ -241,7 +241,7 @@ const Navbar = () => {
             </NavLink>
           </div>
           {/* login and signUp */}
-          <div>
+          {/* <div>
             {}
             <NavLink
               to={"/login"}
@@ -255,7 +255,28 @@ const Navbar = () => {
             >
               <i class="bx bxs-user"></i> SignUp
             </NavLink>
-          </div>
+          </div> */}
+          {/* {authStatus() ? (
+            <li>
+              <Logout />
+            </li>
+          ) : ( */}
+            <div>
+              {}
+              <NavLink
+                to={"/login"}
+                className="text-gray-200 hover:text-primary transition mr-3 font-bold"
+              >
+                Login {""} ||{" "}
+              </NavLink>
+              <NavLink
+                to={"/signup"}
+                className="text-gray-200 hover:text-primary transition font-bold"
+              >
+                <i class="bx bxs-user"></i> SignUp
+              </NavLink>
+            </div>
+          {/* )} */}
         </div>
       </div>
     </nav>

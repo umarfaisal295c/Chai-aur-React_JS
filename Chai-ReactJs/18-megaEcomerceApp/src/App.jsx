@@ -8,6 +8,8 @@ import { Routes, Route, NavLink } from "react-router-dom";
 import LoginPage from "./components/loginSignup/LoginPage";
 import Signup from "./components/loginSignup/SignupPage";
 import Home from "./components/home/Home";
+import { account } from "./appwrite/configAuth";
+import SignupData from "./components/loginSignup/SignupData";
 function App() {
   const [loading, setLoading] = useState("");
   const dispatch = useDispatch();
@@ -22,6 +24,7 @@ function App() {
         }
       })
       .finally(() => setLoading(false));
+    console.log(account);
   }, []);
   return !loading ? (
     <>
@@ -29,8 +32,9 @@ function App() {
       {/* <main> */}
         <Routes>
           <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/signup" element={<Signup/>} />
+          {/* {/* <Route path="/login" element={<LoginPage/>} /> */}
+          <Route path="/signup" element={<Signup/>} /> 
+          {/* <Route path="/signup" element={<SignupData/>} />  */}
         </Routes>
       {/* </main> */}
     </>

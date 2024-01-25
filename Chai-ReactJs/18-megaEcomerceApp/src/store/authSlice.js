@@ -5,19 +5,19 @@ const initialState = {
   cart: [],
 };
 const authSlice = createSlice({
-  name: "slice",
+  name: "auth",
   initialState,
   reducers: {
     // login
     login: (state, action) => {
-      state.status = false;
+      state.status = true;
       state.userData = action.payload.userData;
-    },
-    // logout
-    logout: (state) => {
+  },
+  // logout
+  logout: (state) => {
       state.status = false;
       state.userData = null;
-    },
+  },
     // for addToCart.
     addToCart: (state, action) => {},
     // for removeToCart.
