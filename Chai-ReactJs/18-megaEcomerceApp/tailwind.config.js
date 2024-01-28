@@ -17,12 +17,14 @@ export default {
       fontFamily: {
         popins: "'Poppins', sans-serif",
         roboto: "'Roboto', sans-serif",
-        lemon:" 'Lemon', serif;"
+        lemon: " 'Lemon', serif;",
       },
       colors: {
         primary: "#FD3D57",
         secondary: "#324324",
-        'flag':"#013F1B"
+        flag: "#013F1B",
+        backG: "#F5F5F5",
+        pink:"#FFE8DE"
       },
     },
   },

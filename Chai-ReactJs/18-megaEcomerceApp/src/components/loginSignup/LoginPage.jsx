@@ -39,7 +39,7 @@ const LoginPage = () => {
   };
   return (
     <>
-      <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+      <section className="bg-gray-50 min-h-screen pt-40 flex items-center justify-center">
         <div className="bg-gray-100 flex justify-center rounded-2xl gap-10 shadow-lg max-w-3xl p-5 items-center">
           <div>
             <img

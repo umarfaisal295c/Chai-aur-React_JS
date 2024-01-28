@@ -9,6 +9,8 @@ import { login } from "../../store/authSlice";
 import { Button, Input } from "../../components/index";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+// import { useAppwrite } from 'react-appwrite';
+// import {} from 'appwrite'
 import { account } from "../../appwrite/configAuth";
 const Signup = () => {
   
@@ -56,19 +58,31 @@ const Signup = () => {
   //   }
   // };
 
-  const registerData = async ({name,email,password}) => {
+  // const registerData = async ({name,email,password}) => {
+  //   try {
+  //     const signData = await account.create( ID.unique(),name,email,password);
+  //     console.log("signData", signData);
+  //     if (signData) navigate("/");
+  //   } catch (error) {
+  //     console.log("signData", error);
+  //   }
+  // };
+  const { createAccount } = useAppwrite();
+  const onSubmit = async (data) => {
     try {
-      const signData = await account.create( ID.unique(),name,email,password);
-      console.log("signData", signData);
-      if (signData) navigate("/");
+      // Use the Appwrite SDK to create a new account
+      const response = await createAccount(data.email, data.password, data.name);
+
+      // Handle successful signup (you may want to redirect the user to the login page)
+      console.log('Signup successful', response);
     } catch (error) {
-      console.log("signData", error);
+      // Handle signup error
+      console.error('Signup failed', error);
     }
   };
-
   return (
     <>
-      <section className="bg-gray-50 min-h-screen flex items-center justify-center">
+      <section className="bg-gray-50 pt-40 min-h-screen flex items-center justify-center">
         <div className="bg-gray-100 flex justify-center rounded-2xl gap-12 shadow-lg max-w-3xl p-5 items-center">
           <div>
             <img
@@ -91,7 +105,7 @@ const Signup = () => {
               </Link>
             </p>
             {/* {error && <p className="text-red-600 mt-8 text-center">{error}</p>} */}
-            <form onSubmit={handleSubmit(registerData)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="relative mt-2 ">
                 <Input
                   label="Name"

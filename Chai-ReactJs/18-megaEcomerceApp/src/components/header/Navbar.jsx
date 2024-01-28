@@ -6,7 +6,7 @@ import authServices from "../../appwrite/auth";
 const Navbar = () => {
   const authStatus = useSelector((state) => state.auth.status);
   return (
-    <nav className="bg-gray-800">
+    <nav className="bg-gray-800 ">
       <div className="container flex">
         {/* categories */}
         <div className="px-8 py-4 bg-primary flex items-center cursor-pointer relative  group">
@@ -46,20 +46,125 @@ const Navbar = () => {
           divide-dashed 
                   "
                   >
-                    <li>
-                      <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
-                        Fresh Produce
+                    <li className="flex justify-between items-center hover:bg-gray-100">
+                      <NavLink
+                        to={"/grogeries/freshproduce"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/9341/9341802.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Fresh Produce
+                        </span>
                       </NavLink>
                     </li>
                     <li>
-                      <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
-                        Fresh Produce
+                      <NavLink
+                        to={"/grogeries/breahfast&snacks"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/1459/1459105.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Break fast & Snackss
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/grogeries/beverages"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/7627/7627234.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Beverages
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/grogeries/foodstlepts"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/8508/8508791.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Food Steplets
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/grogeries/househlod"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/10982/10982533.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Householde
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/grogeries/frozenfood"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/5029/5029237.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Frozen Food
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        to={"/grogeries/cat&dog"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/34/34872.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Cat & Dog
+                        </span>
                       </NavLink>
                     </li>
 
                     <li>
-                      <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
-                        Fresh Produce
+                      <NavLink
+                        to={"/grogeries/fish"}
+                        className="flex item-center px-5 py-3  hover:text-primary  transition"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/6202/6202150.png"
+                          className="w-4"
+                          alt=""
+                        />
+                        <span className="ml-5 hover:text-primary transition text-gray-600 text-sm relative group">
+                          Fish
+                        </span>
                       </NavLink>
                     </li>
                   </ul>
@@ -102,7 +207,7 @@ const Navbar = () => {
                     </li>
                   </ul>
                 </li>
-                <li class="">
+                <li className="group/item relative">
                   <NavLink
                     to={""}
                     className="flex item-center px-5 py-3 hover:bg-gray-100 transition"
@@ -115,6 +220,29 @@ const Navbar = () => {
                     <span className="ml-5 hover:text-primary transition text-gray-600 text-sm">
                       Mens Fashions
                     </span>
+                    <ul
+                      class="absolute w-52 hidden  text-gray-700 pt-1 group-hover/item:block top-0 left-52
+                  bg-white shadow-md py-3 divide-y divide-gray-300
+          divide-dashed 
+                  "
+                    >
+                      <li>
+                        <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
+                          Fresh Produce
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
+                          Fresh Produce
+                        </NavLink>
+                      </li>
+
+                      <li>
+                        <NavLink className="flex item-center px-5 py-3 hover:bg-gray-100 transition">
+                          Fresh Produce
+                        </NavLink>
+                      </li>
+                    </ul>
                   </NavLink>
                 </li>
                 <li class="">
@@ -261,21 +389,21 @@ const Navbar = () => {
               <Logout />
             </li>
           ) : ( */}
-            <div>
-              {}
-              <NavLink
-                to={"/login"}
-                className="text-gray-200 hover:text-primary transition mr-3 font-bold"
-              >
-                Login {""} ||{" "}
-              </NavLink>
-              <NavLink
-                to={"/signup"}
-                className="text-gray-200 hover:text-primary transition font-bold"
-              >
-                <i class="bx bxs-user"></i> SignUp
-              </NavLink>
-            </div>
+          <div>
+            {}
+            <NavLink
+              to={"/login"}
+              className="text-gray-200 hover:text-primary transition mr-3 font-bold"
+            >
+              Login {""} ||{" "}
+            </NavLink>
+            <NavLink
+              to={"/signup"}
+              className="text-gray-200 hover:text-primary transition font-bold"
+            >
+              <i class="bx bxs-user"></i> SignUp
+            </NavLink>
+          </div>
           {/* )} */}
         </div>
       </div>
